@@ -1,0 +1,12 @@
+.open .modal {
+  z-index: 1003;
+  display: block !important;
+  opacity: 1;
+  top: 20%;
+  transform: scaleX(1) scaleY(1);
+}
+.open.modal-overlay {
+  z-index: 1002;
+  display: block !important;
+  background: rgba(0, 0, 0, 0.6);
+}
