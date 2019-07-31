@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-var firebaseConfig = {
+var config = {
   apiKey: "AIzaSyDuHLYI8NN_MZ_M4a-_DnJElHOCz5zJQM4",
   authDomain: "shopping-cart-cca15.firebaseapp.com",
   databaseURL: "https://shopping-cart-cca15.firebaseio.com",
@@ -13,6 +13,6 @@ var firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(config);
 firebase.firestore().settings({ timestampsInSnapshots: true });
 export default firebase;

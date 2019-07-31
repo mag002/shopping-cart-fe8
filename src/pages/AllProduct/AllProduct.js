@@ -9,6 +9,7 @@ function AllProduct(props) {
     products.map(product => {
       return (
         <Product
+          id={product.id}
           title={product.name}
           price={product.price}
           img={product.images[0].url}

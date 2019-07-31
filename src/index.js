@@ -6,12 +6,19 @@ import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./reducers/rootReducer";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
+import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
+import { reduxFirestore, getFirestore } from "redux-firestore";
 import thunk from "redux-thunk";
+import fbConfig from "./config/fbConfig";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig)
+  )
 );
 
 ReactDOM.render(

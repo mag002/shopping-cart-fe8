@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import CartItem from "../../components/CartItem/CartItem";
-import { addUserInfo } from "../../actions/cartAction";
+import {
+  addUserInfo,
+  removeFromCart,
+  checkOut
+} from "../../actions/cartAction";
+
 import "./style.css";
 const Modal = props => {
   return (
@@ -45,12 +50,25 @@ class AllProduct extends React.Component {
   handleSubmit = () => {
     this.props.addInfo(this.state.userName);
     this.setState({ open: false });
+    this.props.checkout({
+      name: this.state.userName,
+      products: this.props.cart
+    });
   };
   render() {
     const allCartProduct =
       this.props.cart &&
       this.props.cart.map(product => {
-        return <CartItem title={product.title} img={product.image} />;
+        return (
+          <CartItem
+            title={product.name}
+            img={product.image}
+            price={product.price}
+            size={product.size}
+            remove={this.props.removeProduct}
+            id={product.id}
+          />
+        );
       });
     return (
       <div>
@@ -94,6 +112,12 @@ const mapDispatchToProps = dispatch => {
   return {
     addInfo: name => {
       dispatch(addUserInfo(name));
+    },
+    removeProduct: id => {
+      dispatch(removeFromCart(id));
+    },
+    checkout: cart => {
+      dispatch(checkOut(cart));
     }
   };
 };
